@@ -6,6 +6,8 @@ on:
     branchs:
       - 'main'
       - 'dev'
+  pull_request:
+    type: [opened, reopened, synchronize, labeled, unlabeled]
   workflow_dispatch:
 jobs:
   say-hello:
@@ -13,3 +15,7 @@ jobs:
     steps:
       - run: echo "TODAY=$(date + %y-%m-%d)" >> $GITHUB_ENV
       - run: echo Hello world, today is $TODAY
+      - if: ${{github.event_name == 'pull_request'}}
+        uses: mheap/spring-security-tutorial-labels@v1
+        with:
+          mode: exactly
