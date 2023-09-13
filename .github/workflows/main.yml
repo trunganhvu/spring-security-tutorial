@@ -1,7 +1,11 @@
 name: hello world
 on:
   push:
-    branchs: [main]
+    path:
+      - '!docs/**'
+    branchs:
+      - 'main'
+      - 'dev'
 jobs:
   say-hello:
     runs-on: ubuntu-latest
